@@ -33,6 +33,56 @@ cd pasillo-seguro-unoq/versions/pasillo-seguro-unoq
 
 Requiere toolchain de C y libjpeg en la placa. El binario y las fuentes son chicos: el costo está en el despliegue, no en el tamaño.
 
+<!-- ficha -->
+## Ficha de evaluación
+
+**Madurez global: 3.7/5**
+
+| Criterio | Nota | Evidencia |
+|---|---:|---|
+| Madurez | 3/5 | Un solo binario con pruebas C e integración sintética; 12,3 fps a 1080×1920 en la placa. |
+| Reproducibilidad | 3/5 | Makefile nativo, arm64 y test; el binario ARM depende de headers libjpeg 6.2 y toolchain aarch64. |
+| Documentación | 4/5 | README, límites y alcance, datasheet y guía de desarrollador describen pipeline, compilación y despliegue. |
+| Honestidad de límites | 5/5 | Enumera que no mide distancia, no ve objetos estáticos y no es un sistema de seguridad certificado. |
+| Valor demostrativo | 4/5 | Cuantifica la diferencia con la versión Python: 12,3 fps y 79 ms frente al intérprete. |
+| Facilidad de despliegue | 3/5 | Servicio sin sudo con cron al arranque y scripts de copia; el cross-build es la parte más frágil. |
+
+Reescritura en C bien acotada, con métricas comparables y límites explícitos. Interesa a quien evalúa el costo de un runtime en placa; no sustituye un sistema de seguridad.
+
+## Lo que no funcionó
+
+### pasillo-seguro-unoq — Sin distancia métrica
+
+Limitación declarada: el tiempo al contacto se estima por crecimiento aparente del área, no por una medición en metros. La cámara no está calibrada y la cifra depende del tamaño del objeto y de la perspectiva. Sirve para ordenar riesgo, no para afirmar a qué distancia está una persona.
+
+### pasillo-seguro-unoq — Objetos estáticos fuera del alcance
+
+Limitación declarada: con cámara quieta, la diferencia de frames solo revela lo que se mueve. Un obstáculo estático, camuflado o transparente no aparece, y una multitud densa fusiona varios cuerpos en un solo contorno. El README lo advierte en lugar de presentarlo como detección de objetos.
+
+### pasillo-seguro-unoq — Build ARM atado a libjpeg 6.2
+
+La placa trae libjpeg.so.62 y el binario ARM se compila con los headers 6.2 incluidos en third_party, no con los del host. La biblioteca ARM no se versiona y el cross-build exige aarch64-linux-gnu-gcc. Está documentado como fricción de despliegue, no como fallo del detector.
+
+## Preguntas típicas
+
+**¿Reemplaza a la versión Python?**
+
+Resuelve el mismo caso con menos CPU. La versión Python sigue siendo más fácil de modificar.
+
+**¿Cuánto gana?**
+
+12.3 fps y ~79 ms de latencia en la placa, con un solo proceso y sin dependencias de Python.
+
+**¿Funciona con webcam USB?**
+
+Sí, por ADB o con la cámara expuesta como stream local; la configuración lo contempla.
+
+**¿Es un producto de seguridad?**
+
+No. Es una demostración técnica: no reemplaza un sistema certificado de detección.
+
+<!-- /ficha -->
+
 ## Documentación
 
 - [`docs/datasheet.md`](docs/datasheet.md) — instalación, operación y límites.
@@ -40,9 +90,9 @@ Requiere toolchain de C y libjpeg en la placa. El binario y las fuentes son chic
 - [`docs/REFERENCES.md`](docs/REFERENCES.md) — estándares, librerías y fuentes.
 - [`docs/index.html`](docs/index.html) — página del proyecto (GitHub Pages).
 
-## Alcance y honestidad
+## El proyecto en detalle
 
-## Pasillo Seguro — Arduino UNO Q
+### Pasillo Seguro — Arduino UNO Q
 
 **Percepción local para caminar por un pasillo concurrido.** Un teléfono con
 [IP Webcam](https://play.google.com/store/apps/details?id=com.pas.webcam) transmite
