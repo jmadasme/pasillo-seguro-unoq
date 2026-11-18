@@ -205,12 +205,14 @@ h2{font-size:clamp(30px,4vw,46px);line-height:1.05;letter-spacing:-.04em;margin:
 
 </style>
 <link rel="stylesheet" href="assets/community.css?v=1">
+<link href="rec/player.css?v=1" rel="stylesheet"/>
 </head>
 <body>
 <header class="nav"><div class="wrap nav-in">
   <a class="brand" href="/"><span class="brand-mark"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 2 9 5-9 5-9-5 9-5z"/><path d="m3 12 9 5 9-5M3 17l9 5 9-5"/></svg></span><span>jmadasme<span style="color:var(--accent)">.</span>portfolio</span></a>
   <nav class="nav-links">
-    <a href="#proyecto">Proyecto</a><a href="#versiones">Versiones</a><a href="#stack">Stack</a><a href="#docs">Docs</a><a href="#comunidad">Comunidad</a>
+    <a href="#proyecto">Proyecto</a><a href="#versiones">Versiones</a><a href="#stack">Stack</a><a href="#video">Video</a>
+<a href="#docs">Docs</a><a href="#comunidad">Comunidad</a>
     <a class="btn btn-ghost" style="padding:9px 15px" href="/arduino-unoq/">← Arduino</a>
   </nav>
 </div></header>
@@ -242,6 +244,45 @@ h2{font-size:clamp(30px,4vw,46px);line-height:1.05;letter-spacing:-.04em;margin:
     <div class="card reveal"><span class="tag">Solución</span><h3>La propuesta</h3><p>Reescribir el pipeline en C sobre libjpeg, con buffers fijos y un único binario que sirve la página y procesa el stream.</p></div>
   </div>
 </div></section>
+
+
+<section class="section tight rec-section" id="video" style="--accent:#2E7DFF;--accent2:#14F195">
+<div class="wrap">
+<div class="rec-kicker">REC · VIDEO · 3:01</div>
+<h2 class="rec-h2">Pasillo Seguro: visión en C, sin capas</h2>
+<p class="rec-lead">Alternativa en C al detector Python: lee MJPEG, decodifica con libjpeg, modela el fondo, sigue el contorno dominante del corredor y publica una página con borde verde, ámbar o rojo.</p>
+<div class="rec-banner">
+<span class="rec-banner-icon">📋</span>
+<strong>Puedes copiar y pegar los comandos del video desde el video !!!</strong>
+<span>Pausá, seleccioná el texto de la terminal y copiá.</span>
+</div>
+<div class="rec-shell">
+<div class="rec-bar"><i></i><i></i><i></i><span class="rec-title">Pasillo Seguro: visión en C, sin capas · asciinema</span><span class="rec-rec"><b></b>REC</span></div>
+<div class="rec-screen-wrap">
+<div class="rec-screen" id="rec-screen"></div>
+<div class="rec-poster" id="rec-poster">
+<div class="rec-kicker">ASCIINEMA · 3:01</div>
+<h3>Pasillo Seguro: visión en C, sin capas</h3>
+<p>Alternativa en C al detector Python: lee MJPEG, decodifica con libjpeg, modela el fondo, sigue el contorno dominante del corredor y publica una página con borde verde, ámbar o rojo.</p>
+<div class="rec-poster-meta">pasillo-seguro-unoq · código real</div>
+<button class="rec-btn rec-primary" id="rec-start" type="button">▶ Reproducir</button>
+</div>
+</div>
+<div class="rec-controls">
+<button class="rec-btn rec-primary" id="rec-play" type="button">▶ Reproducir</button>
+<button class="rec-btn" id="rec-restart" type="button">↺ Reiniciar</button>
+<input class="rec-progress" id="rec-range" type="range" min="0" max="1000" value="0" aria-label="Progreso"/>
+<span class="rec-time" id="rec-time">0:00 / 3:01</span>
+<select class="rec-speed" id="rec-speed" aria-label="Velocidad"><option value="1">1×</option><option value="1.25">1.25×</option><option value="1.5">1.5×</option><option value="2">2×</option></select>
+<button class="rec-btn" id="rec-full" type="button" title="Pantalla completa">⛶</button>
+<button class="rec-btn" id="rec-copy" type="button">⧉ Copiar comandos</button>
+<a class="rec-download" href="rec/pasillo-seguro-unoq.cast" download>descargar .cast</a>
+</div>
+</div>
+<p class="rec-note">Los fragmentos son del código real de versions/pasillo-seguro-unoq. No mide distancia métrica, no ve objetos estáticos y no es un sistema de seguridad certificado; el build ARM depende de la libjpeg 6.2 incluida.</p>
+<div class="rec-chapters"><span class="rec-chip"><b>0:06</b> EL PROBLEMA</span><span class="rec-chip"><b>0:21</b> ARQUITECTURA</span><span class="rec-chip"><b>0:34</b> ADQUISICIÓN</span><span class="rec-chip"><b>0:51</b> MOVIMIENTO</span><span class="rec-chip"><b>1:06</b> UMBRAL</span><span class="rec-chip"><b>1:22</b> COMPONENTES</span><span class="rec-chip"><b>1:38</b> TRACKING</span><span class="rec-chip"><b>1:54</b> RIESGO</span><span class="rec-chip"><b>2:09</b> HISTÉRESIS</span><span class="rec-chip"><b>2:23</b> DIBUJO</span><span class="rec-chip"><b>2:37</b> SERVIDOR</span></div>
+</div>
+</section>
 
 <section class="section" id="versiones"><div class="wrap">
   <div class="section-head reveal"><div class="kicker">02 — Versiones</div><h2>La historia, completa.</h2><p class="section-sub">Cada carpeta conserva una etapa del proyecto. No se borraron las anteriores: se pusieron en contexto.</p></div>
@@ -643,5 +684,7 @@ third_party/    headers libjpeg v8/v62 (la .so ARM no se versiona)
 <script>window.PORTFOLIO_COMMUNITY={account:"jmadasme",repo:"pasillo-seguro-unoq",coinNamespace:"jmadasme-pasillo-seguro-unoq-coins-v1",faqs:[{"q": "¿Reemplaza a la versión Python?", "a": "Resuelve el mismo caso con menos CPU. La versión Python sigue siendo más fácil de modificar."}, {"q": "¿Cuánto gana?", "a": "12.3 fps y ~79 ms de latencia en la placa, con un solo proceso y sin dependencias de Python."}, {"q": "¿Funciona con webcam USB?", "a": "Sí, por ADB o con la cámara expuesta como stream local; la configuración lo contempla."}, {"q": "¿Es un producto de seguridad?", "a": "No. Es una demostración técnica: no reemplaza un sistema certificado de detección."}]};</script>
 <script src="assets/community.js?v=2" defer></script>
 
+<script defer src="rec/pasillo-seguro-unoq.cast.js?v=1"></script>
+<script defer src="rec/player.js?v=1"></script>
 </body>
 </html>
